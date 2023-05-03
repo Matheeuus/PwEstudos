@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Modelo de Currículo</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+    <button id="btn-gerar-pdf">Gerar PDF</button>
+    </center>
+	<div class="container">
+		<header>
+			<h1 id="nome"></h1>
+			<p id="cargo"></p>
+		</header>
+		<main>
+			<section>
+				<h2>Resumo</h2>
+				<p id="resumo"></p>
+			</section>
+			<section>
+				<h2>Experiência Profissional</h2>
+				<ul id="experiencia">
+				</ul>
+			</section>
+			<section>
+				<h2>Formação Acadêmica</h2>
+				<ul id="formacao">
+				</ul>
+			</section>
+			<section>
+				<h2>Habilidades</h2>
+				<ul id="habilidades">
+				</ul>
+			</section>
+		</main>
+	</div>
+
+    <script>
+
+        // Captura o botão
+        const btnGerarPdf = document.querySelector('#btn-gerar-pdf');
+
+        // Adiciona um listener para o evento de clique no botão
+        btnGerarPdf.addEventListener('click', gerarPdf);
+
+        // Função que gera o PDF
+        function gerarPdf() {
+        // Captura o elemento HTML que será utilizado para gerar o PDF
+        const element = document.querySelector('.container');
+
+        // Cria um objeto html2pdf com as configurações desejadas
+        const opt = {
+            margin: 0,
+            filename: 'curriculo.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Gera o PDF a partir do elemento HTML
+        html2pdf().set(opt).from(element).save();
+        }
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
